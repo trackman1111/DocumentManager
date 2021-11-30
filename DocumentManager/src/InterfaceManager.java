@@ -32,7 +32,8 @@ public class InterfaceManager {
 		
 		//Loop Through Options
 		while (!option.equals("q")){
-			System.out.println("\nEnter an option: \n1:Search by name\n2:Search by tag\n3:Display Documents(id)\n4:Display all Documents" );
+			System.out.println("\nEnter an option: \n1:Search by name\n2:Search by tag\n3:Display document(by id)"
+					+ "\n4:Display all Documents\n5:Add a comment(by id)\n5:View comments(by id)" );
 			option = sc.nextLine();
 			if (option.equals("1"))
 			{
@@ -44,10 +45,35 @@ public class InterfaceManager {
 				System.out.println("Enter a tag to search for: ");
 				displayTagged(currentUser.searchTags(sc));
 			}
+			else if (option.equals("3"))
+			{
+				System.out.println("Enter a document to display: ");
+				int documentId = sc.nextInt();
+				if (documentId < 1 || documentId >= documents.size())
+				{
+					System.out.println("Invalid DocumentID");
+				}
+				else
+				{
+					sc.nextLine();
+					System.out.println(documents.get(documentId-1).getTitle() + ":\n" + documents.get(documentId-1).getText());
+				}
+				
+			}
 			else if (option.equals("4"))
 			{
 				System.out.println("All Documents: ");
 				displayDocs(documents);
+			}
+			else if (option.equals("5"))
+			{
+				System.out.println("Enter a tag to search for: ");
+				displayTagged(currentUser.searchTags(sc));
+			}
+			else if (option.equals("6"))
+			{
+				System.out.println("Enter a tag to search for: ");
+				displayTagged(currentUser.searchTags(sc));
 			}
 			else {
 				System.out.println("Invalid Option...");
@@ -91,8 +117,8 @@ public class InterfaceManager {
 	//Create Document List
 	public static List<Document> createDocuments() throws FileNotFoundException
 	{
-		Document docOne = new Document("/Users/brandonmorrell/Desktop/SoftwareModeling/DocumentManager/DocumentOne.txt", true, 1);
-		Document docTwo = new Document("/Users/brandonmorrell/Desktop/SoftwareModeling/DocumentManager/DocumentTwo.txt", true, 2);
+		Document docOne = new Document("DocumentOne.txt", true, 1);
+		Document docTwo = new Document("DocumentTwo.txt", true, 2);
 		//Document docThree = new Document("/Users/brandonmorrell/Desktop/SoftwareModeling/DocumentManager/DocumentThree.txt", false);
 		Document[] documents = {docOne, docTwo};
 		return Arrays.asList(documents);

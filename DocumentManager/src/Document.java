@@ -87,4 +87,9 @@ public class Document {
 	public int getId() {
 		return id;
 	}
+
+	public String getText() {
+		// TODO Auto-generated method stub
+		return text;
+	}
 }
