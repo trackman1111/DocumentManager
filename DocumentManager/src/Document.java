@@ -12,6 +12,7 @@ public class Document {
 	private int numPages;
 	private String text;
 	private String[] tags;
+	private Comment[] comments;
 	private int totalRating;
 	private int numRatings;
 	private boolean isPublic;
