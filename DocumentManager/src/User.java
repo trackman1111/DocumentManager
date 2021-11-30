@@ -30,6 +30,6 @@ public class User {
 	//Print User Info
 	public String toString()
 	{
-		return "User: " + name + " DOB: " + dateOfBirth.getTime();
+		return "User: " + name;
 	}
 }

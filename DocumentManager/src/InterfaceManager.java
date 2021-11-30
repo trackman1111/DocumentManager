@@ -4,6 +4,7 @@ import java.util.*;
 public class InterfaceManager {
 	
 	private static List<Document> documents;
+	private static User currentUser;
 
 	public static void main(String[] args) throws FileNotFoundException
 	{
@@ -26,14 +27,14 @@ public class InterfaceManager {
 		birthday.set(Calendar.YEAR, year);
 		birthday.set(Calendar.DATE, day);
 		birthday.set(Calendar.MONTH, month - 1);
-		User currentUser = new User(username, birthday);		
+		currentUser = new User(username, birthday);		
 		System.out.println("\nCreated User:\n" + currentUser);
 		sc.nextLine();
 		
 		//Loop Through Options
 		while (!option.equals("q")){
 			System.out.println("\nEnter an option: \n1:Search by name\n2:Search by tag\n3:Display document(by id)"
-					+ "\n4:Display all Documents\n5:Add a comment(by id)\n5:View comments(by id)" );
+					+ "\n4:Display all Documents\n5:Add a comment(by id)\n6:View comments(by id)" );
 			option = sc.nextLine();
 			if (option.equals("1"))
 			{
@@ -55,9 +56,10 @@ public class InterfaceManager {
 				}
 				else
 				{
-					sc.nextLine();
 					System.out.println(documents.get(documentId-1).getTitle() + ":\n" + documents.get(documentId-1).getText());
 				}
+
+				sc.nextLine();
 				
 			}
 			else if (option.equals("4"))
@@ -67,13 +69,37 @@ public class InterfaceManager {
 			}
 			else if (option.equals("5"))
 			{
-				System.out.println("Enter a tag to search for: ");
-				displayTagged(currentUser.searchTags(sc));
+				System.out.println("What document would you like to add a comment to? ");
+				int documentId = sc.nextInt();
+				sc.nextLine();
+				if (documentId < 1 || documentId >= documents.size())
+				{
+					System.out.println("Invalid DocumentID");
+				}
+				else
+				{
+					System.out.println("Type in a comment!");
+					String comment = sc.nextLine();
+					documents.get(documentId-1).addComment(comment, currentUser);
+				}
+				
 			}
 			else if (option.equals("6"))
 			{
-				System.out.println("Enter a tag to search for: ");
-				displayTagged(currentUser.searchTags(sc));
+				System.out.println("What document would you like to view comments for?");
+				int documentId = sc.nextInt();
+				if (documentId < 1 || documentId >= documents.size())
+				{
+					System.out.println("Invalid DocumentID");
+				}
+				else
+				{
+					List<Comment> comments = documents.get(documentId-1).getComments();
+					for( Comment com : comments) {
+						System.out.println(com);
+					}
+				}
+				
 			}
 			else {
 				System.out.println("Invalid Option...");

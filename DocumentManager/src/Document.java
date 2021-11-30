@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.*;
 import java.util.Scanner;
 
 public class Document {
@@ -12,7 +13,7 @@ public class Document {
 	private int numPages;
 	private String text;
 	private String[] tags;
-	private Comment[] comments;
+	private List<Comment> comments = new ArrayList<Comment>();
 	private int totalRating;
 	private int numRatings;
 	private boolean isPublic;
@@ -91,5 +92,15 @@ public class Document {
 	public String getText() {
 		// TODO Auto-generated method stub
 		return text;
+	}
+
+	public void addComment(String comment, User currentUser) {
+		comments.add(new Comment(comment, currentUser));
+		
+	}
+
+	public List<Comment> getComments() {
+		// TODO Auto-generated method stub
+		return comments;
 	}
 }
