@@ -33,7 +33,7 @@ public class InterfaceManager {
 		
 		//Loop Through Options
 		while (!option.equals("q")){
-			System.out.println("\nEnter an option: \n1:Search by name\n2:Search by tag\n3:Display document(by id)"
+			System.out.println("\nEnter an option(q to quit): \n1:Search by name\n2:Search by tag\n3:Display document(by id)"
 					+ "\n4:Display all Documents\n5:Add a comment(by id)\n6:View comments(by id)" );
 			option = sc.nextLine();
 			if (option.equals("1"))
@@ -50,7 +50,7 @@ public class InterfaceManager {
 			{
 				System.out.println("Enter a document to display: ");
 				int documentId = sc.nextInt();
-				if (documentId < 1 || documentId >= documents.size())
+				if (documentId < 1 || documentId > documents.size())
 				{
 					System.out.println("Invalid DocumentID");
 				}
@@ -72,7 +72,7 @@ public class InterfaceManager {
 				System.out.println("What document would you like to add a comment to? ");
 				int documentId = sc.nextInt();
 				sc.nextLine();
-				if (documentId < 1 || documentId >= documents.size())
+				if (documentId < 1 || documentId > documents.size())
 				{
 					System.out.println("Invalid DocumentID");
 				}
@@ -88,7 +88,7 @@ public class InterfaceManager {
 			{
 				System.out.println("What document would you like to view comments for?");
 				int documentId = sc.nextInt();
-				if (documentId < 1 || documentId >= documents.size())
+				if (documentId < 1 || documentId > documents.size())
 				{
 					System.out.println("Invalid DocumentID");
 				}
@@ -134,6 +134,10 @@ public class InterfaceManager {
 	}
 	
 	private static void displayDocs(List<Document> foundDocs) {
+		if (foundDocs.size() == 0)
+		{
+			System.out.println("No documents found...");
+		}
 		for ( Document doc : foundDocs ) {
 			System.out.println(doc.getId() + ": " + doc.getTitle());
 		}
