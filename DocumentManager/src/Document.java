@@ -16,9 +16,10 @@ public class Document {
 	private int totalRating;
 	private int numRatings;
 	private boolean isPublic;
+	private int id;
 	
 	
-	public Document(String filepath) throws FileNotFoundException
+	public Document(String filepath, boolean isPublic, int id) throws FileNotFoundException
 	{
 		File file = new File(filepath);
 		Scanner sc = new Scanner(file);
@@ -27,8 +28,11 @@ public class Document {
 		publishedCity = sc.nextLine();
 		description = sc.nextLine();
 		tags = sc.nextLine().split(",");
-		isPublic = false;
+		this.isPublic = isPublic;
 		numPages = sc.nextInt();
+		sc.nextLine();
+		text = "";
+		this.id = id;
 		
 		while (sc.hasNext()) 
 		{
@@ -78,5 +82,9 @@ public class Document {
 	public String[] getTags()
 	{
 		return tags;
+	}
+
+	public int getId() {
+		return id;
 	}
 }
